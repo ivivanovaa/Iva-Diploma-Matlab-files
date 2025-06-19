@@ -1,0 +1,35 @@
+[System]
+Name='InverterFuzzyController'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=4
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='TemperatureDifference'
+Range=[-10 10]
+NumMFs=3
+MF1='Cold':'trapmf',[-10 -10 -4 -1]
+MF2='Comfortable':'trapmf',[-2 -0.5 0.5 2]
+MF3='Hot':'trapmf',[1 4 10 10]
+
+[Output1]
+Name='Power'
+Range=[-100 100]
+NumMFs=4
+MF1='CoolStrong':'trapmf',[-100 -100 -70 -40]
+MF2='CoolLight':'trapmf',[-60 -30 0 0]
+MF3='HeatLight':'trapmf',[0 0 30 60]
+MF4='HeatStrong':'trapmf',[40 70 100 100]
+
+[Rules]
+1, 4 (1) : 1
+2, 1 (1) : 1
+2, 3 (1) : 1
+3, 2 (1) : 1
